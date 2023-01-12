@@ -1,5 +1,6 @@
-- 👋 Hi, I’m @santoro-mariano. I'm from Argentina and I'm currently living in USA
-- 👀 I’m interested in Software, 3D printing, electronics and EV like my onewheel :)
+- 👋 Hi, I’m @santoro-mariano. I'm from Argentina 🇦🇷 and I'm currently living in USA 🇺🇸
+- 👀 I’m interested in software, 3D printing, electronics, woodworking and EV like my onewheel :)
+- ⚽ River Plate fan!
 - 🌱 I’m currently learning Github CI/CD (Github workflow/actions)
 
 Currently I'm mainly working on one of my open source projects (the biggest one so far) 👉 [Golden Reports](https://goldenreports.io/)
