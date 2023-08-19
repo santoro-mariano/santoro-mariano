@@ -3,7 +3,7 @@
 - ⚽ River Plate fan!
 - 🌱 I’m currently learning Github CI/CD (Github workflow/actions)
 
-Currently I'm mainly working on one of my open source projects/contributions (the biggest one so far) 👉 [Golden Reports](https://goldenreports.io/)
+Currently I'm mainly working on one of my open source projects/contributions (the biggest one so far) 👉 [Golden Reports](https://goldenreports.dev/)
 - PR/Contributions are very welcome!
 - The project name is dedicated to my little girl Luna 🐶, the **golden** retriever that's my companion during my one wheel rides.
 
