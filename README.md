@@ -3,9 +3,7 @@
 - ⚽ River Plate fan!
 - 🌱 I’m currently learning Github CI/CD (Github workflow/actions)
 
-Currently I'm mainly working on one of my open source projects/contributions (the biggest one so far) 👉 [Golden Reports](https://goldenreports.dev/)
-- PR/Contributions are very welcome!
-- The project name is dedicated to my little girl Luna 🐶, the **golden** retriever that's my companion during my one wheel rides.
+Currently I'm mainly working on [Golden Reports](https://goldenreports.dev) and [Vana](https://workvana.dev), the two flagship products of my company [Wolfware](https://wolfware.dev)
 
 <!---
 santoro-mariano/santoro-mariano is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
