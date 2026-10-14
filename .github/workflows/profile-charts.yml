@@ -24,20 +24,18 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Stats card and header
+      - name: Render profile sheet
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_USER: ${{ github.repository_owner }}
         run: |
           pip install -r scripts/requirements.txt
-          python scripts/header.py
-          python scripts/stats.py
+          python scripts/profile.py
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: charts
           path: |
-            assets/
             dist/
           retention-days: 1
 
@@ -57,7 +55,7 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add -A assets dist
+          git add -A dist
           if git commit -m "Update profile charts"; then
             git push
           fi
