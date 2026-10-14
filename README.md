@@ -1,15 +1,10 @@
-<h1 align="center">Mariano Santoro</h1>
-<p align="center">Software engineer at <a href="https://wolfware.dev"><b>Wolfware</b></a> · Tennessee, USA</p>
-
-<p align="center">
-  <a href="https://wolfware.dev"><img src="https://img.shields.io/badge/wolfware.dev-1f2328?style=flat-square" alt="wolfware.dev" /></a>
-  <a href="https://github.com/wolfware-labs"><img src="https://img.shields.io/badge/GitHub-wolfware--labs-1f2328?style=flat-square&logo=github" alt="wolfware-labs" /></a>
-</p>
-
----
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/header-dark.svg" />
+  <img src="./assets/header-light.svg" alt="Mariano Santoro. Software engineer at Wolfware. Electronics and 3D printing after hours." width="100%" />
+</picture>
 
 I've spent more than ten years building backend systems in .NET, across logistics, finance, pharmacy
-and enterprise software. These days most of my work happens at **Wolfware**, where we build developer
+and enterprise software. These days most of my work happens at [**Wolfware**](https://wolfware.dev), where we build developer
 tools, mostly in Rust: release automation, reporting, real-time messaging and UI.
 
 What keeps me interested is the point where software meets the physical world. When I'm not writing
@@ -35,11 +30,8 @@ a part gets designed, printed, wired up, and eventually needs firmware. My dogs 
 ### Activity
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-rainbow.svg" />
-  <img src="./profile-3d-contrib/profile-green-animate.svg" alt="3D contribution chart" />
+  <source media="(prefers-color-scheme: dark)" srcset="./dist/stats-dark.svg" />
+  <img src="./dist/stats-light.svg" alt="Contributions, commits, pull requests and code reviews in the last 12 months, plus top languages" width="100%" />
 </picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./dist/snake-dark.svg" />
-  <img src="./dist/snake.svg" alt="Contribution graph snake" />
-</picture>
+<sub>Images regenerate daily from the GitHub API. Typeface: <a href="https://fonts.google.com/specimen/Archivo">Archivo</a> (SIL Open Font License).</sub>
