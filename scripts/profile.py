@@ -144,20 +144,65 @@ def radar(collection):
         parts.append(text(label, 14, lx, ly, anchor, opacity=.75))
         parts.append(text(f"{value:,}", 14, lx, ly + 18, anchor, "Figure", .95))
     pts = [at(i, min(math.log10(max(v, 1)) / decades, 1)) for i, (_, v) in enumerate(axes)]
-    parts.append(f'<polygon points="{" ".join(f"{x:.1f},{y:.1f}" for x, y in pts)}" fill="url(#hatch-light)" '
-                 f'stroke="{LINE}" stroke-width="1.8" stroke-linejoin="round"/>')
-    parts += [f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4" fill="{LINE}"/>' for x, y in pts]
-    return "\n".join(parts), axes
+    # On load the shape grows out of the centre: each dot slides along its own axis
+    # while the outline and hatching scale up with it.
+    d = "M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts) + "Z"
+    origin = f"transform-origin:{cx}px {cy}px"
+    parts.append(f'<g class="grow" style="{origin}">'
+                 f'<path d="{d}" fill="url(#hatch-light)" class="fade"/>'
+                 f'<path d="{d}" fill="none" stroke="{LINE}" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>'
+                 f'</g>')
+    for i, (x, y) in enumerate(pts):
+        parts.append(f'<circle class="dot" style="animation-name:dot{i}" cx="{x:.1f}" cy="{y:.1f}" r="4" fill="{LINE}"/>')
+    keyframes = "".join(f"@keyframes dot{i} {{ from {{ transform: translate({cx - x:.1f}px, {cy - y:.1f}px); }} }}\n"
+                        for i, (x, y) in enumerate(pts))
+    return "\n".join(parts), axes, keyframes
+
+
+def spring(damping_ratio=0.6, samples=100):
+    """A CSS linear() easing sampled from a real damped spring.
+
+    The shape is released at the centre with its elastic stretched to the data
+    values: the pull flings it out fast, carries it past the target and draws it
+    back until it rests. 0.6 gives about a 9% overshoot and a 1% pull-back.
+    """
+    x, v, dt, trace = 0.0, 0.0, 0.001, []
+    while True:
+        v += (-(x - 1) - 2 * damping_ratio * v) * dt
+        x += v * dt
+        trace.append(x)
+        if len(trace) > 2000 and abs(x - 1) < 0.002 and abs(v) < 0.002:
+            break
+    step = (len(trace) - 1) / samples
+    stops = ", ".join(f"{trace[round(i * step)]:.4f}" for i in range(samples)) + ", 1"
+    return f"linear(0, {stops})"
+
+
+GROW = f"1.6s .3s {spring()} both"
+
+
+def motion(keyframes):
+    return f"""<style>
+  .grow {{ transform-box: view-box; animation: grow {GROW}; }}
+  .fade {{ animation: fade {GROW}; }}
+  .dot  {{ transform-box: view-box; animation: {GROW}; }}
+  @keyframes grow {{ from {{ transform: scale(0); }} }}
+  @keyframes fade {{ from {{ opacity: 0; }} }}
+{keyframes}  @media (prefers-reduced-motion: reduce) {{
+    .grow, .fade, .dot {{ animation: none; }}
+  }}
+</style>"""
 
 
 def render(collection):
     stats, figures, langs = activity(collection)
-    profile, axes = radar(collection)
+    profile, axes, keyframes = radar(collection)
     defs = "".join(
         f'<pattern id="{pid}" width="{s}" height="{s}" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
         f'<path d="M0 0V{s}" stroke="{LINE}" stroke-opacity="{o}" stroke-width="1.5"/></pattern>'
         for pid, s, o in (("hatch", 6, .7), ("hatch-light", 7, .35)))
     body = "\n".join([
+        motion(keyframes),
         f"<defs>{defs}</defs>",
         name_block(),
         f'<path d="M{X} 210H{W - X}" stroke="{LINE}" stroke-opacity=".35" stroke-dasharray="6 5"/>',
